@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-class Listitems extends Component {
+class Posts extends Component {
  
   constructor(props) {
     super(props);
@@ -30,4 +30,4 @@ class Listitems extends Component {
   }
 }
 
-export default Listitems;
+export default Posts;
