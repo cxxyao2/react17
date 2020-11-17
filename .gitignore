@@ -24,3 +24,7 @@ yarn-error.log*
 
 # images
 /src/images
+
+
+# old code
+/src/back-code

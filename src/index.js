@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
+import 'jquery/dist/jquery.min.js';
 import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/js/src/collapse.js";
 // import reportWebVitals from './reportWebVitals';
 
 
