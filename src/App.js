@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 
 
-import Movies from './components/movieForm';
+import Movies from './components/movies';
 import Customers from './components/customers';
 import Rentals from './components/rentals';
 import NotFound from './components/notFound';

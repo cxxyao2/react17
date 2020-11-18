@@ -1,0 +1,21 @@
+{
+  "folders": [
+	{
+		"path": "."
+	},
+	{
+		"path": "../mycode/2020/exp_server1"
+	}
+],
+  "settings": {
+		"search.globalFindClipboard": true,
+		"maven.excludedFolders": [
+		
+			"**/.*",
+			"**/node_modules",
+			"**/target",
+			"**/bin"
+		],
+		"editor.codeActionsOnSave": null
+	}
+}
