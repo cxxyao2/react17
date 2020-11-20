@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 // import { Link } from 'react-router-dom';
 axios.interceptors.response.use(null, error => {
@@ -9,7 +10,7 @@ axios.interceptors.response.use(null, error => {
 
   if (!expectedError) {
     console.log("Logging the error", error);
-    alert("An unexpected error occured");
+    toast.error("An unexpected error occured");
   }
 
   return Promise.reject(error);

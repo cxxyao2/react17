@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import logger from './services/logService';
+
 import './index.css';
 import App from './App';
 import 'jquery/dist/jquery.min.js';
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/js/src/collapse.js";
+import 'font-awesome/css/font-awesome.min.css';
 // import reportWebVitals from './reportWebVitals';
 
 
@@ -26,7 +29,7 @@ import "bootstrap/js/src/collapse.js";
 //   return user.firstName + ' ' + user.lastName;
 // }
 
-
+logger.init();
 
   ReactDOM.render(
     <BrowserRouter>

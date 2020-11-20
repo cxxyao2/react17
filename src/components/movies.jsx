@@ -1,17 +1,18 @@
 import React, { useState, useEffect} from 'react';
 import http from '../services/httpService';
+import config from '../config.json';
+import { getMovies, deleteMovie as deleteService } from '../services/movieService';
 
 
-
-export default function Movies() {
+export default function Movies({...props}) {
   const [movies, setMovies ] = useState([]);
   // const [err, setError] = useState("");
-  const endpoint ="http://localhost:5000/api/movies";
+  const endpoint = config.apiEndpoint;
 
 
   useEffect( () => {
     async function fetchData() {
-      const promise = http.get(endpoint);
+      const promise = getMovies();
       const {data} = await promise;
       setMovies(data);
     }
@@ -22,7 +23,7 @@ export default function Movies() {
       console.log('error network');
       console.log(ex);
     }
-  },[]);
+  });
 
   const addMovie = async () => {
     const movie = {
@@ -40,23 +41,36 @@ export default function Movies() {
   // patch: a part of fields
   const updateMovie = async () => {
     const movie = {
-      title: "my grand brother",
+      title: "my grand brother2",
       genreId: "5f9f3377aa82f8ad2fddebaa",
       numberInStock: 66,
       dailyRentalRate: 88
     };
-    const movieid = '5fb45796a153c51c1ad5aa09';
+    const movieid = '5fb4572aa153c51c1ad5a9da';
     const updateEndPoint =  `${endpoint}/${movieid}`;
     const promise = http.put(updateEndPoint, movie);
     const { data } = await promise;
     console.log(data);
   };
 
+  const getOneMovie = async () => {
+    const movieid = '5fb543e32bf9790590c6f471';
+    try {
+      const { data: movie } = await http.get(endpoint + '/' + movieid);
+      console.log(movie);
+
+    } catch (error) {
+      if(error.response && error.response.status === 404)
+      return props.history.replace("/non-found");
+    }
+  }
+
   const deleteMovie = async () => {
    
-    const movieid = '5fb47aa9a153c51c1ad5aa8d';
-    const deleteEndpoint = `${endpoint}/${movieid}`;
-    const promise = http.delete(deleteEndpoint);
+    const movieid = '5fb4572aa153c51c1ad5a9da';
+    // const deleteEndpoint = `${endpoint}/${movieid}`;
+    // const promise = http.delete(deleteEndpoint);
+     const promise = deleteService(movieid);
     try {
       const { data } = await promise;
       console.log(data);
@@ -74,6 +88,7 @@ export default function Movies() {
 
   return (
     <div>
+      <button onClick={getOneMovie} >Get a Movie </button>
       <button onClick={addMovie} >Add a new Movie</button>
       <button onClick={updateMovie} >update Movie</button>
       <button onClick={deleteMovie} >delete Movie</button>
