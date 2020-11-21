@@ -1,33 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react'
 import Like from "../common/like";
+import Table from './table';
+class MoviesTable extends Component {
 
-const MoviesTable = (props) => {
-  const { movies, onDelete, onLike, onUpdate, onSort } = props;
+  columns = [
+    {path: "title", label:"Title"},
+    { path: "genre", label:"Genre"},
+    { path: "stock", label:"Stock"},
+    { path: "rate", label:"Rate"},
+    { key: "Like", 
+      content: movie => <Like liked={movie.liked} onClick={() => this.props.onLike(movie)} />
+    },
+    { key: "Delete", 
+      content: movie =><button onClick={() => this.props.onDelete(movie)} className="btn btn-danger btn-sm">Delete</button>
+    },
+    { key: "Update",
+      content: movie => <button onClick={() => this.props.onUpdate(movie)} className="btn btn-info btn-sm">Update</button>
+    },
+  ];
 
-  return (<table className="table">
-    <tr>
-      <th onClick={() => onSort("title")}>Title</th>
-      <th onClick={() => onSort("Genre")}>Genre</th>
-      <th onClick={() => onSort("stock")}>Stock</th>
-      <th onClick={() => onSort("rate")}>Rate</th>
-      <th>{""}</th>
-      <th>{""}</th>
-      <th>{""}</th>
-    </tr>
-    <tbody>
-      {movies.map((movie, index) =>
-        <tr key={index}>
-          <td>{movie.title}</td>
-          <td>{movie.Genre}</td>
-          <td>{movie.stock}</td>
-          <td>{movie.rate}</td>
-          <td><Like liked={movie.liked} onClick={() => onLike(movie)} /></td>
-          <td><button onClick={() => onDelete(movie)} className="btn btn-danger btn-sm">Delete</button></td>
-          <td><button onClick={() => onUpdate(movie)} className="btn btn-info btn-sm">Update</button></td>
-        </tr>
-      )}
-    </tbody>
-  </table> );
+  raiseSort = path => {
+    this.props.onSort(path);
+  };
+  
+  render() { 
+    const { movies,  sortColumn } = this.props;
+
+    return (
+      <Table 
+        columns={this.columns}
+        sortColumn={sortColumn}
+        onSort={this.raiseSort}
+        data={movies}
+      />
+    );
+  };
+
 }
- 
+
 export default MoviesTable;
+
