@@ -4,8 +4,9 @@ import config from '../config.json';
 import { getMovies, deleteMovie as deleteService } from '../services/movieService';
 
 
-export default function Movies({...props}) {
+export default function Movies(props) {
   const [movies, setMovies ] = useState([]);
+  const { user } = props;
   // const [err, setError] = useState("");
   const endpoint = config.apiEndpoint;
 
@@ -33,8 +34,7 @@ export default function Movies({...props}) {
       dailyRentalRate: 25
     };
     const promise = http.post(endpoint,movie);
-    const { data } = await promise;
-    console.log(data);
+    await promise;
   };
 
   // put: update all the fields required:
@@ -66,8 +66,8 @@ export default function Movies({...props}) {
   }
 
   const deleteMovie = async () => {
-   
-    const movieid = '5fb4572aa153c51c1ad5a9da';
+    // 5fbdcdf6afcc680a5cbc323a
+    const movieid = '5fb57dba2bf97905902b1f92';
     // const deleteEndpoint = `${endpoint}/${movieid}`;
     // const promise = http.delete(deleteEndpoint);
      const promise = deleteService(movieid);
@@ -91,7 +91,8 @@ export default function Movies({...props}) {
       <button onClick={getOneMovie} >Get a Movie </button>
       <button onClick={addMovie} >Add a new Movie</button>
       <button onClick={updateMovie} >update Movie</button>
-      <button onClick={deleteMovie} >delete Movie</button>
+      {user &&
+        <button onClick={deleteMovie} >delete Movie</button>}
       <label>Movies</label>
       <ul>
       {movies.length >0 && movies.map(

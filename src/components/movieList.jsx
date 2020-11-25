@@ -21,6 +21,8 @@ class MovieList extends Component {
     searchQuery: ""
    };
 
+   
+
    componentDidMount () {
      const genres = [{name: "All Genres"}, ...getGenres()];
      this.setState({ movies: getMovies(), genres: genres});
