@@ -12,3 +12,10 @@ username = react.createRef();
 componentDidMount() {
 this.username.current.focus();
 }
+
+# shortcut
+
+react.js extension for vscode:
+rcc : create a component class
+
+rsf: stateless function component

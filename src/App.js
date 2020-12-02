@@ -18,6 +18,7 @@ import RegisterForm from './forms/RegisterForm';
 import NewMovieForm from './forms/newMovieForm';
 import Logout from './components/logout';
 import ProtectedRoute from './components/protectedRoute';
+import FileUpload from './forms/FileUpload';
 
 
 class App extends Component {
@@ -47,6 +48,9 @@ class App extends Component {
             <Route path="/movielist" component={MovieList} />
             <ProtectedRoute path="/rentals" component={Rentals} />
             <Route path="/not-found" component={NotFound}></Route>
+            <Route path="/fileup" >
+              <FileUpload />
+            </Route>
             <Redirect from="/" exact to="/movies" />
             <Redirect to="/not-found" />
         </Switch>
